@@ -4,10 +4,27 @@ export interface DebouncedFunction<TArgs extends unknown[]> {
 }
 
 export function debounce<TArgs extends unknown[]>(
-  _fn: (...args: TArgs) => void,
-  _delay: number,
+  fn: (...args: TArgs) => void,
+  delay: number,
 ): DebouncedFunction<TArgs> {
-  const stub = (..._args: TArgs): void => {};
-  stub.cancel = (): void => {};
-  return stub;
+  let timerId: ReturnType<typeof setTimeout> | undefined;
+
+  const debounced = (...args: TArgs): void => {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    timerId = setTimeout(() => {
+      timerId = undefined;
+      fn(...args);
+    }, delay);
+  };
+
+  debounced.cancel = (): void => {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+      timerId = undefined;
+    }
+  };
+
+  return debounced;
 }
