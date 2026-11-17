@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { searchCountries } from '../src/api/searchCountries.js';
-import { SearchController, type SearchViewState } from '../src/core/searchController.js';
+import { SearchController, type SearchViewState } from '../src/core/searchController';
 
 describe('Race condition and real AbortController cancellation', () => {
   beforeEach(() => {
