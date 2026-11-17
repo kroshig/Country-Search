@@ -1,0 +1,479 @@
+:root {
+  --bg-deep: #060b16;
+  --bg-surface: rgba(15, 23, 42, 0.72);
+  --bg-card: rgba(30, 41, 59, 0.55);
+  --bg-card-hover: rgba(30, 41, 59, 0.85);
+  --border-glass: rgba(148, 163, 184, 0.14);
+  --border-glow: rgba(56, 189, 248, 0.55);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #38bdf8;
+  --accent-indigo: #6366f1;
+  --accent-emerald: #10b981;
+  --danger-bg: rgba(127, 29, 29, 0.35);
+  --danger-border: rgba(248, 113, 113, 0.45);
+  --danger-text: #fecaca;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-pill: 9999px;
+  --shadow-card: 0 14px 32px -10px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 28px -4px rgba(56, 189, 248, 0.28);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family:
+    'Plus Jakarta Sans',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.55;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.14) 0%, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.14) 0%, transparent 45%),
+    linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    40px 40px,
+    40px 40px;
+  background-attachment: fixed;
+}
+
+.app-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.app-header::before {
+  content: '🌐 WORLD GEOGRAPHIC INTELLIGENCE • ATLAS API';
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1rem;
+}
+
+.app-header h1 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 20%, #93c5fd 65%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.search-box {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-box::before {
+  content: '⌕';
+  position: absolute;
+  left: 1.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.35rem;
+  color: var(--accent-cyan);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1.05rem 1.5rem 1.05rem 3.3rem;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:focus {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.history-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.15rem;
+}
+
+.history-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.history-chip {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.history-chip::after {
+  content: ' ↗';
+  font-size: 0.7rem;
+  opacity: 0.55;
+}
+
+.history-chip:hover {
+  color: var(--text-primary);
+  background: rgba(56, 189, 248, 0.14);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}
+
+.status-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.loading-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1.6rem;
+  background: var(--bg-surface);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-pill);
+  color: var(--accent-cyan);
+  font-weight: 600;
+  box-shadow: var(--shadow-glow);
+}
+
+.loading-indicator::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(56, 189, 248, 0.25);
+  border-top-color: var(--accent-cyan);
+  border-radius: 50%;
+  animation: radar-spin 0.75s linear infinite;
+}
+
+@keyframes radar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty-state {
+  max-width: 480px;
+  padding: 1.75rem 2rem;
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  border: 1px dashed rgba(148, 163, 184, 0.25);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.empty-state::before {
+  content: '🧭';
+  display: block;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-state {
+  max-width: 520px;
+  width: 100%;
+  padding: 1.5rem 1.75rem;
+  background: var(--danger-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--radius-lg);
+  color: var(--danger-text);
+  text-align: center;
+  box-shadow: 0 12px 30px -10px rgba(220, 38, 38, 0.35);
+}
+
+.error-message {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+}
+
+.retry-button {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.retry-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .content-layout:has(.details-panel:not(.hidden)) {
+    grid-template-columns: 1.65fr 1fr;
+  }
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 1.5rem;
+}
+
+.country-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  outline: none;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.country-card:hover,
+.country-card:focus-visible {
+  transform: translateY(-6px);
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+}
+
+.country-flag {
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--border-glass);
+  transition: transform 0.4s ease;
+}
+
+.country-card:hover .country-flag {
+  transform: scale(1.04);
+}
+
+.country-flag-emoji {
+  width: 100%;
+  height: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.25rem;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12), rgba(15, 23, 42, 0.8));
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.card-body {
+  padding: 1.35rem;
+}
+
+.country-name {
+  margin: 0 0 0.85rem;
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.country-name::after {
+  content: '→';
+  font-size: 1rem;
+  color: var(--accent-cyan);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.25s ease;
+}
+
+.country-card:hover .country-name::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.meta-row {
+  margin: 0.45rem 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+  padding-bottom: 0.35rem;
+}
+
+.meta-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.meta-row strong {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.meta-row span {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+}
+
+.details-panel {
+  background: linear-gradient(165deg, rgba(30, 41, 59, 0.88), rgba(15, 23, 42, 0.92));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.85rem;
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  position: sticky;
+  top: 2rem;
+  animation: dossier-slide 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dossier-slide {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.details-panel::before {
+  content: 'DIPLOMATIC DOSSIER';
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.85rem;
+}
+
+.details-panel.hidden {
+  display: none;
+}
+
+.details-panel h2 {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+.close-details-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-details-button:hover {
+  color: var(--text-primary);
+  background: rgba(248, 113, 113, 0.2);
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+.country-description {
+  margin: 0 0 1.25rem;
+  padding: 0.9rem 1rem;
+  background: rgba(15, 23, 42, 0.55);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
